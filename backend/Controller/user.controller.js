@@ -91,7 +91,7 @@ export const getSuggestedUsers = async (req, res) => {
 
     const suggestedUsers = filteredUsers.slice(0, 4);
     suggestedUsers.map((user) => {
-      user.password = undefined;
+      user.password = null;
     });
     res.status(200).json(suggestedUsers);
   } catch (error) {
