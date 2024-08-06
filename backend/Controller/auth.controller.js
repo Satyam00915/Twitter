@@ -59,13 +59,15 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
+  const { username, password } = req.body;
   try {
-    const { username, password } = req.body;
     const user = await User.findOne({ username });
+    console.log(user);
     const isPasswordCorrect = await bcrypt.compare(
       password,
       user.password || ""
     );
+    console.log(isPasswordCorrect);
 
     if (!user || !isPasswordCorrect) {
       return res.status(400).json({ error: "Invalid Credentials" });
@@ -103,6 +105,6 @@ export const getMe = async (req, res) => {
     const userData = await User.findById({ _id: user._id }).select("-password");
     res.status(201).json({ userData });
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error!" });
+    res.status(500).json({ error: `Internal Server Error! ${error}` });
   }
 };
