@@ -1,7 +1,6 @@
-import { text } from "express";
-import mongoose, { mongo, Types } from "mongoose";
+import mongoose from "mongoose";
 
-const postSchema = mongoose.Schema(
+const postSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
